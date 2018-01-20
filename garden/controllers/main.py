@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, flash, request, redirect, url_for
-from flask_login import login_user, logout_user, login_required
+from flask_login import current_user, login_user, logout_user, login_required
 
 from garden.extensions import cache
 from garden.forms import LoginForm
@@ -40,3 +40,6 @@ def logout():
 @login_required
 def restricted():
     return "You can only see this if you are logged in!", 200
+
+
+
