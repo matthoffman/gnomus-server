@@ -12,8 +12,7 @@ from garden.extensions import (
     debug_toolbar,
     login_manager,
     api_manager,
-    auth_func,
-    admin
+    auth_func
 )
 
 
@@ -48,9 +47,6 @@ def create_app(object_name):
 
     # initialize flask_restless
     api_manager.init_app(app, flask_sqlalchemy_db=db)
-
-    # initialize the admin UI
-    admin.init_app(app)
 
     # Import and register the different asset bundles
     assets_env.init_app(app)
