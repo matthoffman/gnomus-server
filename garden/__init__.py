@@ -3,7 +3,7 @@
 from flask import Flask
 from webassets.loaders import PythonLoader as PythonAssetsLoader
 from garden import assets
-from garden.models import db
+from garden.models import db, test_user
 from garden.controllers.main import main
 
 from garden.extensions import (
@@ -12,7 +12,8 @@ from garden.extensions import (
     debug_toolbar,
     login_manager,
     api_manager,
-    auth_func
+    auth_func,
+    admin
 )
 
 
@@ -36,7 +37,10 @@ def create_app(object_name):
     # initialize the debug tool bar
     debug_toolbar.init_app(app)
 
-    # initialize SQLAlchemy
+    # initialize SQLAlchemy if necessary
+    # print("No database currently. Building user.")
+    # build_sample_db()
+
     db.init_app(app)
 
     # initialize flask_login
@@ -44,6 +48,9 @@ def create_app(object_name):
 
     # initialize flask_restless
     api_manager.init_app(app, flask_sqlalchemy_db=db)
+
+    # initialize the admin UI
+    admin.init_app(app)
 
     # Import and register the different asset bundles
     assets_env.init_app(app)
@@ -54,4 +61,12 @@ def create_app(object_name):
     # register our blueprints
     app.register_blueprint(main)
 
+
     return app
+
+
+def build_sample_db():
+    db.create_all()
+    db.session.add(test_user)
+
+

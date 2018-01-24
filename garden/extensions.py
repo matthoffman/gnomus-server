@@ -4,6 +4,7 @@ from flask_login import LoginManager
 from flask_assets import Environment
 from flask_login import current_user
 from flask_restless import APIManager, ProcessingException
+from flask_admin import Admin
 
 from garden.models import User
 
@@ -33,5 +34,9 @@ def auth_func(**kw):
     if not current_user.is_authenticated():
         raise ProcessingException(description='Not Authorized', code=401)
 
+
+# It's frustrating to me that overriding AdminIndexView doesn't seem to be working; it's throwing crazy errors. But
+# their sample works, so it must be doing something I'm doing wrong.
+admin = Admin(name='Admin', template_mode='bootstrap3')
 
 

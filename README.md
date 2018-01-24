@@ -12,6 +12,14 @@ Some design notes and thoughts:
 Now, the actual sensor readings need to be in some kind of datastore, and I want that to be backed up. Could be a set of log files, or could be a proper database. Not sure what a proper database buys me, but then again, I'm not sure what it really costs me either. That is really the problem SQLite is trying to solve: 
 > SQLite does not compete with client/server databases. SQLite competes with fopen().
 
+Maybe 
+
+# Design
+
+
+
+# TODO
+
 
 
 # Backing up the database
