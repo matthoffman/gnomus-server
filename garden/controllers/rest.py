@@ -1,5 +1,6 @@
 from garden.extensions import api_manager, auth_func
 from garden.models import User, Location, Sensor, SensorReading, MeasurementType
+from flask_restless import ProcessingException
 
 # This uses flask-restless to generate a REST API for these objects
 api_manager.create_api(User, methods=['GET', 'PUT', 'POST', 'DELETE'], preprocessors={
