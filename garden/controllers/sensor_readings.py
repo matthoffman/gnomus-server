@@ -13,8 +13,6 @@ from garden.models import User, db, Sensor, SensorReading
 readings = Blueprint('readings', __name__)
 logger = getLogger(__name__)
 readingLogger = getLogger("readings")
-# We haven't established exactly what sensor readings should look like. One option is:
-#
 
 
 @readings.route("/reading", methods=["POST"])
@@ -37,6 +35,7 @@ def new_reading():
     #               "abc123.0x76": {"value": 432}
     #               }
     #  }
+    #
     # We want to turn it into a set of SensorReading records like:
     # { "id": ...,
     #   "sensor_id" : looked_up_sensor_id,
