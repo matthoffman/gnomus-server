@@ -17,6 +17,13 @@ Maybe
 # Design
 
 
+# Visualization
+
+ - Get all locations. 
+ - For each, get all sensors for that location.
+ - For each sensor, look up all sensor readings. Plot them on a graph. Label the graph with the sensor's name.
+ - Done.
+ 
 
 # TODO
 
@@ -56,3 +63,8 @@ After restoring, verify the results.
 sqlite3 database.db 'select * from users;'
 ```
 (or pick the table of choice, obviously)
+
+
+Of course, you can also back up and restore using the web services to output JSON. 
+
+
