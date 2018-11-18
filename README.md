@@ -1,12 +1,16 @@
-# Garden Server
+# Gnomus server
 
-This is a Flask app that will hopefully be the brains of the garden server.
+This is a Flask app that is brains of the garden server, managing sensors defined in the [gnomus-sensors](https://github.com/matthoffman/gnomus-sensors) project.
 
 It started from [JackStouffer's Flask-Foundation](https://github.com/JackStouffer/Flask-Foundation), so documentation at [https://jackstouffer.com/flask-foundation](https://jackstouffer.com/flask-foundation/) is relevant
 
 This is very much a work in progress.  You'll notice, at this point in early development, that there's some excessively detailed design notes strewn about in files like this one.
-That's because I find time to work on this in small increments, so it helps me to be overly explicit with what I'm thinking about each piece so that I can pick it up again later.
+That's because I find time to work on this in small increments, so it helps me to be overly explicit with what I'm thinking so that I can pick it up again later.
 
+## Gnomus?
+
+A word invented by Paracelsus in the 18th century to describe small earth-dwelling creatures; it became the English "gnome". 
+The plan is for this server to manage sensors that are deployed in various places in the garden inside plastic garden gnomes, so the name seems appropriate.
 
 
 # Design
@@ -24,19 +28,23 @@ Now, the actual sensor readings are a bit different. They are much higher volume
 So, that's probably the expedient option. We're not looking at more volume that SQLite can handle, certainly.
 
 
-# Visualization
+## Visualization
 
  - Get all locations. 
  - For each, get all sensors for that location.
  - For each sensor, look up all sensor readings. Plot them on a graph. Label the graph with the sensor's name.
- - Done.
- 
+
+There's still a fair chance that I'll integrate an existing graphing / visualization solution here instead of rolling my own. 
+I'm intentionally rolling my own sensor code, because it's an excuse to work with Micropython and it's fun, but I 
+don't feel any need to reinvent the millions of graphing and charting solutions that already exist. We'll see what ends 
+up being most expedient.
+
 
 # TODO
 
 
 
-# Backing up the database
+## Backing up the database
 
 To make a backup copy of the database, you can use the built-in "backup" command:
 
@@ -50,7 +58,7 @@ Or simply do a "dump" and redirect the results to a file. Not sure why you'd do 
 sqlite3 database.db .dump > database.db.bak
 ```
 
-# Restoring the database
+## Restoring the database
 
 To restore a database taken from "backup", you use "restore": 
 ```
