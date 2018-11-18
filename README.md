@@ -1,20 +1,27 @@
 # Garden Server
 
 This is a Flask app that will hopefully be the brains of the garden server.
-We'll see...
 
-It started from https://github.com/JackStouffer/Flask-Foundation, so documentation at https://jackstouffer.com/flask-foundation/ is relevant
+It started from [JackStouffer's Flask-Foundation](https://github.com/JackStouffer/Flask-Foundation), so documentation at [https://jackstouffer.com/flask-foundation](https://jackstouffer.com/flask-foundation/) is relevant
+
+This is very much a work in progress.  You'll notice, at this point in early development, that there's some excessively detailed design notes strewn about in files like this one.
+That's because I find time to work on this in small increments, so it helps me to be overly explicit with what I'm thinking about each piece so that I can pick it up again later.
 
 
-Some design notes and thoughts: 
-1. I'm wondering if a database might be too much for this. My configuration data model is a set of garden beds (maybe 6 or 7?), a set of sensors (roughly 3-4 per bed, so < 20?), and maybe some global config. So that could be stored in a big JSON file, or set of JSON files. 
-
-Now, the actual sensor readings need to be in some kind of datastore, and I want that to be backed up. Could be a set of log files, or could be a proper database. Not sure what a proper database buys me, but then again, I'm not sure what it really costs me either. That is really the problem SQLite is trying to solve: 
-> SQLite does not compete with client/server databases. SQLite competes with fopen().
-
-Maybe 
 
 # Design
+
+## Database or Flat File Configuration?
+
+My configuration data model is a set of garden beds (maybe 6 or 7?), a set of sensors (roughly 3-4 per bed, so < 20?), and maybe some global config. So that could be stored in a big JSON file, or set of JSON files, or it could be defined in an actual database.
+
+I'd like it to be easy to backup and restore, and easy to modify as the garden setup changes. In most cases, I'd lean toward configuring it in text files (YAML or similar) on disk, and version the config in Git, so I could easily version it, roll back, etc. 
+But in this particular case, I hope to manage it via a web UI, so for expedience's sake I plan on storing it in whatever form is easiest to manage via Flask, which might well be a simple database.
+
+Now, the actual sensor readings are a bit different. They are much higher volume, and I want that to be backed up. They could be a set of log files, or could be a proper database. Not sure what a proper database buys me, but then again, I'm not sure what it really costs me either. That is really the problem SQLite is trying to solve (from their webpage): 
+> SQLite does not compete with client/server databases. SQLite competes with fopen().
+
+So, that's probably the expedient option. We're not looking at more volume that SQLite can handle, certainly.
 
 
 # Visualization
